@@ -1,5 +1,8 @@
 # UWP PR Validation
 
+# Submodule
+git submodule update --init --recursive
+
 # Fetch LiteCore
 pushd vendor/couchbase-lite-core
 $sha=$(& 'C:\Program Files\Git\bin\git.exe' rev-parse HEAD)
