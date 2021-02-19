@@ -32,6 +32,7 @@ jobs:
       UwpSupport_Project_Directory: src\Couchbase.Lite.Support.UWP\Couchbase.Lite.Support.UWP.csproj
       NetDesktopSupport_Project_Name: src\Couchbase.Lite.Support.NetDesktop\Couchbase.Lite.Support.NetDesktop.csproj
       Solution_Directory: src\Couchbase.Lite.Tests\UWPCoverage\Couchbase.Lite.Tests
+      Test_Lib_Directory: src\Couchbase.Lite.Tests.UWPCoverage\bin\x64\Debug\AppX
 
     steps:
     
@@ -70,7 +71,7 @@ jobs:
       
     # Run VSTest
     - name: Run VSTest
-      run: vstest.console.exe /InIsolation /Platform:x64 AppPackages\Couchbase.Lite.Tests.UWP_1.0.0.0_x64_Debug_Test\Couchbase.Lite.Tests.UWP_1.0.0.0_x64_Debug.appx /Logger:trx /diag:diagnostic.txt
+      run: vstest.console.exe /Platform:x64 $env:Test_Lib_Directory
       
     #msbuild /p:Configuration=Debug /p:Platform=x64 /t:Rebuild Couchbase.Lite.Tests.UWP.csproj || goto :error
     #vstest.console.exe /InIsolation /Platform:x64 AppPackages\Couchbase.Lite.Tests.UWP_1.0.0.0_x64_Debug_Test\Couchbase.Lite.Tests.UWP_1.0.0.0_x64_Debug.appx /Logger:trx /diag:diagnostic.txt || goto :error
