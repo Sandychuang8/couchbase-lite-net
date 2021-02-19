@@ -26,7 +26,7 @@ jobs:
     
     env:
       SigningCertificate: Couchbase.Lite.Tests.UWP_TemporaryKey.pfx
-      Solution_Path: src\Couchbase.Lite.Tests\UWPCoverage\Couchbase.Lite.Tests\UWPCoverage.sln
+      Solution_Path: src\Couchbase.Lite.Tests.UWPCoverage\Couchbase.Lite.Tests.UWPCoverage.sln
       Test_Project_Path: src\Couchbase.Lite.Tests.UWPCoverage\Couchbase.Lite.Tests.UWPCoverage.csproj
       Cbl_Project_Path: src\Couchbase.Lite.Enterprise\Couchbase.Lite.Enterprise.csproj
       UwpSupport_Project_Directory: src\Couchbase.Lite.Support.UWP\Couchbase.Lite.Support.UWP.csproj
