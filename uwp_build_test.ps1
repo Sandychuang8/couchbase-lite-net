@@ -10,7 +10,7 @@ New-Item -Type Directory vendor/couchbase-lite-core/build_cmake/x86_store/RelWit
 
         New-Item -Type Directory vendor/couchbase-lite-core/build_cmake/x64_store
         Push-Location vendor/couchbase-lite-core/build_cmake/x64_store
-        cmake -G "Visual Studio 16 2019" -A x64 -DCMAKE_SYSTEM_NAME=WindowsStore -DCMAKE_SYSTEM_VERSION=10.0 ..\..
+        cmake -G "Visual Studio 16 2019" -A x64 -DCMAKE_SYSTEM_NAME=WindowsStore -DCMAKE_SYSTEM_VERSION='10.0' ..\..
         cmake --build . --target LiteCore --config RelWithDebInfo
         Pop-Location
 
