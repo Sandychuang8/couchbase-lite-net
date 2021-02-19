@@ -28,7 +28,7 @@ jobs:
       SigningCertificate: Couchbase.Lite.Tests.UWP_TemporaryKey.pfx
       Solution_Path: src\Couchbase.Lite.Tests.UWPCoverage\Couchbase.Lite.Tests.UWPCoverage.sln
       Test_Project_Path: src\Couchbase.Lite.Tests.UWPCoverage\Couchbase.Lite.Tests.UWPCoverage.csproj
-      Cbl_Project_Path: src\Couchbase.Lite.Enterprise\Couchbase.Lite.Enterprise.csproj
+      Cbl_Project_Path: src\Couchbase.Lite\Couchbase.Lite.csproj
       UwpSupport_Project_Directory: src\Couchbase.Lite.Support.UWP\Couchbase.Lite.Support.UWP.csproj
       NetDesktopSupport_Project_Name: src\Couchbase.Lite.Support.NetDesktop\Couchbase.Lite.Support.NetDesktop.csproj
       Solution_Directory: src\Couchbase.Lite.Tests\UWPCoverage\Couchbase.Lite.Tests
@@ -40,9 +40,6 @@ jobs:
       run: pwsh -command ".\$GITHUB_WORKSPACE\uwp_build_test.ps1"
         
 #### BUILD
-
-    #- name:Set MSBuild Path
-    #  run: echo “::add-path::C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin”
 
     # Add  MsBuild to the PATH: https://github.com/microsoft/setup-msbuild
     - name: Setup MSBuild.exe
@@ -63,7 +60,6 @@ jobs:
         $certificatePath = Join-Path -Path $currentDirectory -ChildPath $env:Solution_Directory -AdditionalChildPath $env:SigningCertificate
         [IO.File]::WriteAllBytes("$certificatePath", $pfx_cert_byte)
 
-        #msbuild /t:Restore Couchbase.Lite.Tests.UWP.csproj
     #msbuild /p:Configuration=Debug /p:Platform=x64 /t:Rebuild Couchbase.Lite.Tests.UWP.csproj || goto :error
     #vstest.console.exe /InIsolation /Platform:x64 AppPackages\Couchbase.Lite.Tests.UWP_1.0.0.0_x64_Debug_Test\Couchbase.Lite.Tests.UWP_1.0.0.0_x64_Debug.appx /Logger:trx /diag:diagnostic.txt || goto :error
 
