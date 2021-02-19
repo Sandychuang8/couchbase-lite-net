@@ -49,14 +49,14 @@ jobs:
     - name: Restore Projects
       run:  msbuild $env:Solution_Path /t:Restore /p:Configuration=$env:Configuration /p:RuntimeIdentifier=$env:RuntimeIdentifier
       env:
-        Configuration: Debug
+        Configuration: Debug_Coverage
         RuntimeIdentifier: win-${{ matrix.targetplatform }}
         
     # Build the solution
     - name: Build Projects
       run: msbuild $env:Solution_Path /p:Configuration=$env:Configuration /p:RuntimeIdentifier=$env:RuntimeIdentifier /t:Rebuild
       env:
-        Configuration: Debug
+        Configuration: Debug_Coverage
         RuntimeIdentifier: win-${{ matrix.targetplatform }}
         
     # Decode the Base64 encoded Pfx
