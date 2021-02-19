@@ -70,7 +70,8 @@ jobs:
       
     # Run VSTest
     - name: Run VSTest
-      run: vstest.console.exe /Platform:x64 .\src\Couchbase.Lite.Tests.UWPCoverage\bin\x64\Debug\AppX\Couchbase.Lite.Tests.UWPCoverage.exe
+      working-directory: $\src\Couchbase.Lite.Tests.UWPCoverage\bin\x64\Debug\AppX\
+      run: vstest.console.exe /Platform:x64 .\Couchbase.Lite.Tests.UWPCoverage.dll
       
     #msbuild /p:Configuration=Debug /p:Platform=x64 /t:Rebuild Couchbase.Lite.Tests.UWP.csproj || goto :error
     #vstest.console.exe /InIsolation /Platform:x64 AppPackages\Couchbase.Lite.Tests.UWP_1.0.0.0_x64_Debug_Test\Couchbase.Lite.Tests.UWP_1.0.0.0_x64_Debug.appx /Logger:trx /diag:diagnostic.txt || goto :error
