@@ -32,7 +32,7 @@ jobs:
       UwpSupport_Project_Directory: src\Couchbase.Lite.Support.UWP\Couchbase.Lite.Support.UWP.csproj
       NetDesktopSupport_Project_Name: src\Couchbase.Lite.Support.NetDesktop\Couchbase.Lite.Support.NetDesktop.csproj
       Solution_Directory: src\Couchbase.Lite.Tests\UWPCoverage\Couchbase.Lite.Tests
-      Test_Lib_Directory: src\Couchbase.Lite.Tests.UWPCoverage\bin\x64\Debug\AppX\Couchbase.Lite.Tests.UWPCoverage.exe
+      Test_Lib_Directory: .\src\Couchbase.Lite.Tests.UWPCoverage\bin\x64\Debug\AppX\Couchbase.Lite.Tests.UWPCoverage.exe
 
     steps:
     
