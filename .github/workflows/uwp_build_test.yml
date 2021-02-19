@@ -52,9 +52,9 @@ jobs:
         Configuration: Debug
         RuntimeIdentifier: win-${{ matrix.targetplatform }}
         
-    # Build the test project
-    - name: Build Test Project
-      run: msbuild $env:Test_Project_Path /p:Configuration=$env:Configuration /p:RuntimeIdentifier=$env:RuntimeIdentifier /t:Rebuild
+    # Build the solution
+    - name: Build Projects
+      run: msbuild $env:Solution_Path /p:Configuration=$env:Configuration /p:RuntimeIdentifier=$env:RuntimeIdentifier /t:Rebuild
       env:
         Configuration: Debug
         RuntimeIdentifier: win-${{ matrix.targetplatform }}
