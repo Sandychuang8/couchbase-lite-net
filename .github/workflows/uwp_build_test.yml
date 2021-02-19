@@ -52,6 +52,12 @@ jobs:
         Configuration: Debug
         RuntimeIdentifier: win-${{ matrix.targetplatform }}
         
+    # Build the solution
+      run: msbuild $env:Test_Project_Path /p:Configuration=$env:Configuration /p:RuntimeIdentifier=$env:RuntimeIdentifier /t:Rebuild
+      env:
+        Configuration: Debug
+        RuntimeIdentifier: win-${{ matrix.targetplatform }}
+        
     # Decode the Base64 encoded Pfx
     #- name: Decode the Pfx
     #  run: |
@@ -76,9 +82,4 @@ jobs:
     #msbuild /p:Configuration=Debug /p:Platform=x64 /t:Rebuild Couchbase.Lite.Tests.UWP.csproj || goto :error
     #vstest.console.exe /InIsolation /Platform:x64 AppPackages\Couchbase.Lite.Tests.UWP_1.0.0.0_x64_Debug_Test\Couchbase.Lite.Tests.UWP_1.0.0.0_x64_Debug.appx /Logger:trx /diag:diagnostic.txt || goto :error
     
-    #- name: Execute Tests
-    #  run: msbuild $env:Test_Project_Path /p:Configuration=$env:Configuration /p:RuntimeIdentifier=$env:RuntimeIdentifier /t:Rebuild
-    #  env:
-    #    Configuration: Debug
-    #    RuntimeIdentifier: win-${{ matrix.targetplatform }}
       
