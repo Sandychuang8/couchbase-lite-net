@@ -44,19 +44,31 @@ jobs:
     # Add  MsBuild to the PATH: https://github.com/microsoft/setup-msbuild
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@v1.0.2
+      
+    # Restore CBL Net
+    - name: Restore CBL Net
+      run:  msbuild $env:Cbl_Project_Path /t:Restore /p:Configuration=$env:Configuration
+      env:
+        Configuration: Debug_Coverage
+        
+    # Build CBL Net
+    - name: Build CBL Net
+      run:  msbuild $env:Cbl_Project_Path /p:JUST_CSHARP=1 /p:Configuration=$env:Configuration
+      env:
+        Configuration: Debug_Coverage
         
     # Restore the solution
     - name: Restore Projects
       run:  msbuild $env:Solution_Path /t:Restore /p:Configuration=$env:Configuration /p:RuntimeIdentifier=$env:RuntimeIdentifier
       env:
-        Configuration: Debug_Coverage
+        Configuration: Debug
         RuntimeIdentifier: win-${{ matrix.targetplatform }}
         
     # Build the solution
     - name: Build Projects
       run: msbuild $env:Solution_Path /p:Configuration=$env:Configuration /p:RuntimeIdentifier=$env:RuntimeIdentifier /t:Rebuild
       env:
-        Configuration: Debug_Coverage
+        Configuration: Debug
         RuntimeIdentifier: win-${{ matrix.targetplatform }}
         
     # Decode the Base64 encoded Pfx
