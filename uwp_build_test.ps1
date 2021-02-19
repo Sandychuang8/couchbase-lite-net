@@ -1,7 +1,7 @@
 # UWP PR Validation
 
 # Submodule
-git submodule update --init # recursive not needed here  --recursive
+git submodule update --init # (--recursive) recursive not needed here 
 
 # Fetch LiteCore
 pushd vendor/couchbase-lite-core
