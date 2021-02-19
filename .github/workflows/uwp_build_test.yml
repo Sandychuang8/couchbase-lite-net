@@ -53,17 +53,28 @@ jobs:
         RuntimeIdentifier: win-${{ matrix.targetplatform }}
         
     # Decode the Base64 encoded Pfx
-    - name: Decode the Pfx
-      run: |
-        $pfx_cert_byte = [System.Convert]::FromBase64String("${{ secrets.Base64_Encoded_Pfx }}")
-        $currentDirectory = Get-Location
-        $certificatePath = Join-Path -Path $currentDirectory -ChildPath $env:Solution_Directory -AdditionalChildPath $env:SigningCertificate
-        [IO.File]::WriteAllBytes("$certificatePath", $pfx_cert_byte)
+    #- name: Decode the Pfx
+    #  run: |
+    #    $pfx_cert_byte = [System.Convert]::FromBase64String("${{ secrets.Base64_Encoded_Pfx }}")
+    #    $currentDirectory = Get-Location
+    #    $certificatePath = Join-Path -Path $currentDirectory -ChildPath $env:Solution_Directory -AdditionalChildPath $env:SigningCertificate
+    #    [IO.File]::WriteAllBytes("$certificatePath", $pfx_cert_byte)
 
-    #msbuild /p:Configuration=Debug /p:Platform=x64 /t:Rebuild Couchbase.Lite.Tests.UWP.csproj || goto :error
-    #vstest.console.exe /InIsolation /Platform:x64 AppPackages\Couchbase.Lite.Tests.UWP_1.0.0.0_x64_Debug_Test\Couchbase.Lite.Tests.UWP_1.0.0.0_x64_Debug.appx /Logger:trx /diag:diagnostic.txt || goto :error
+    
 
     # Tests
+    
+    # Locate vstest.console.exe and add to PATH
+    - name: Setup VSTest path
+      uses: darenm/Setup-VSTest@v1
+      
+    # Run VSTest
+    - name: Run VSTest
+      run: vstest.console.exe /InIsolation /Platform:x64 AppPackages\Couchbase.Lite.Tests.UWP_1.0.0.0_x64_Debug_Test\Couchbase.Lite.Tests.UWP_1.0.0.0_x64_Debug.appx /Logger:trx /diag:diagnostic.txt
+      
+    #msbuild /p:Configuration=Debug /p:Platform=x64 /t:Rebuild Couchbase.Lite.Tests.UWP.csproj || goto :error
+    #vstest.console.exe /InIsolation /Platform:x64 AppPackages\Couchbase.Lite.Tests.UWP_1.0.0.0_x64_Debug_Test\Couchbase.Lite.Tests.UWP_1.0.0.0_x64_Debug.appx /Logger:trx /diag:diagnostic.txt || goto :error
+    
     #- name: Execute Tests
     #  run: msbuild $env:Test_Project_Path /p:Configuration=$env:Configuration /p:RuntimeIdentifier=$env:RuntimeIdentifier /t:Rebuild
     #  env:
