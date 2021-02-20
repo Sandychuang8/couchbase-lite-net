@@ -37,6 +37,10 @@ jobs:
 
     steps:
     
+    - uses: actions/checkout@v1
+    - name: Build LiteCore
+      run: pwsh -command ".\$GITHUB_WORKSPACE\uwp_build_test.ps1"
+    
     # Add  MsBuild to the PATH: https://github.com/microsoft/setup-msbuild
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@v1.0.2
@@ -52,10 +56,6 @@ jobs:
       run:  msbuild $env:Cbl_Project_Path /p:JUST_CSHARP=1 /p:Configuration=$env:Configuration
       env:
         Configuration: Debug_Coverage
-        
-    - uses: actions/checkout@v1
-    - name: Build LiteCore
-      run: pwsh -command ".\$GITHUB_WORKSPACE\uwp_build_test.ps1"
         
     # Restore UWP test project
     - name: Restore UWP test project
