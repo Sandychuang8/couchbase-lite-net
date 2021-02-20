@@ -33,14 +33,10 @@ jobs:
       NetDesktopSupport_Project_Name: src\Couchbase.Lite.Support.NetDesktop\Couchbase.Lite.Support.NetDesktop.csproj
       Solution_Directory: src\Couchbase.Lite.Tests\UWPCoverage\Couchbase.Lite.Tests
 
+#### BUILD and TEST
+
     steps:
     
-    - uses: actions/checkout@v1
-    - name: Run PowerShell script
-      run: pwsh -command ".\$GITHUB_WORKSPACE\uwp_build_test.ps1"
-        
-#### BUILD
-
     # Add  MsBuild to the PATH: https://github.com/microsoft/setup-msbuild
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@v1.0.2
@@ -57,12 +53,13 @@ jobs:
       env:
         Configuration: Debug_Coverage
         
-    # Restore the solution
-    - name: Restore Projects
-      run:  msbuild $env:Solution_Path /t:Restore /p:Configuration=$env:Configuration /p:RuntimeIdentifier=$env:RuntimeIdentifier
-      env:
-        Configuration: Debug
-        RuntimeIdentifier: win-${{ matrix.targetplatform }}
+    - uses: actions/checkout@v1
+    - name: Build LiteCore
+      run: pwsh -command ".\$GITHUB_WORKSPACE\uwp_build_test.ps1"
+        
+    # Restore UWP test project
+    - name: Restore UWP test project
+      run:  msbuild $env:Test_Project_Path /t:Restore
         
     # Build the solution
     - name: Build Projects
